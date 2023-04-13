@@ -89,6 +89,10 @@ Route::group(['middleware' => ['api']], function(){
 });
 
 Route::apiResource('productdetails', App\Http\Controllers\API\ProductDetailsController::class);
+// get similar products
+Route::group(['middleware' => ['api']], function(){
+    Route::get('similar_products/productdetails/{id}', 'App\Http\Controllers\API\ProductDetailsController@similar_products');
+});
 Route::apiResource('admin',App\Http\Controllers\API\AdminController::class);
 Route::apiResource('customer',App\Http\Controllers\API\CustomerController::class);
 Route::apiResource('delivery',App\Http\Controllers\API\DeliveryController::class);
