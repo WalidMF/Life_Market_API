@@ -19,30 +19,17 @@ class ProductDetailsController extends Controller
 {
 
     public function similar_products(string $id){
-
         $arr[]=[];
         $i=0;
-
-        $subCategories_id=SubCategories::where('cat_id',$id)->get('id');
-      
-        $product=Products::get();
- 
-        foreach( $subCategories_id as  $subCat_id){
- 
-             foreach($product as $prd){
- 
-                 if( $prd['sub_cat_id'] == $subCat_id['id'] ){
-                      
-                     $arr[$i]=$prd;
-                     $i++;
-                 }
-   
-             }
-            
+        $product=Products::where('sub_cat_id',$id)->get();
+        foreach($product as $prd){
+            if($prd->quantity > 0){
+                $arr[$i]=$prd;
+                $i++;
+            }
         }
-         return $arr;
- 
-     }
+        return $arr;
+    }
 
     /**
      * Display a listing of the resource.
